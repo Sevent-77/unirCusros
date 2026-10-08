@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ListCourse extends AppCompatActivity {
 
-    private ArrayList<Curso> list;
+
     private RecyclerView recyclerView;
     private CourseAdapter adapter;
 
@@ -34,7 +34,7 @@ public class ListCourse extends AppCompatActivity {
         String grau = getIntent().getStringExtra("grau");
         boolean noite = getIntent().getBooleanExtra("noite", false);
 
-        list = CursosData.getCursos();
+
 
 
         ArrayList<Curso> todosCursos = CursosData.getCursos();
@@ -58,12 +58,14 @@ public class ListCourse extends AppCompatActivity {
             }
         }
 
-        adapter = new CourseAdapter(list);
+        adapter = new CourseAdapter(lista);
         recyclerView = findViewById(R.id.recyclerView);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        findViewById(R.id.emptyMessage).setVisibility(lista.isEmpty()
+                ? android.view.View.VISIBLE : android.view.View.GONE);
     }
 }

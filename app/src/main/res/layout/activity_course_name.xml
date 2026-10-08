@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical" android:padding="16dp">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -52,13 +52,13 @@
             android:id="@+id/buttonAcess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Acessar site do curso" />
 
         <Button
             android:id="@+id/buttonShare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Compartilhar curso" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,17 +44,18 @@ public class MainActivity extends AppCompatActivity {
         String option[] = {"Vilhena","Rolim de Moura", "Presidente Médici", "Ji-Paraná", "Guajará-Mirim","Cacoal", "Ariquemes", "Porto Velho", "Todos"};
         Collections.reverse(Arrays.asList(option));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, option);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        String campus = spinner.getSelectedItem().toString();
-        int selected = radioGroup.getCheckedRadioButtonId();
-        RadioButton rb = findViewById(selected);
-        String grau = rb.getText().toString();
-        boolean noite = checkBox.isChecked();
 
 
         button = findViewById(R.id.button);
         button.setOnClickListener(view -> {
+            String campus = spinner.getSelectedItem().toString();
+            int selected = radioGroup.getCheckedRadioButtonId();
+            RadioButton rb = findViewById(selected);
+            String grau = rb == null ? "Todos" : rb.getText().toString();
+            boolean noite = checkBox.isChecked();
             Intent intent = new Intent(MainActivity.this, ListCourse.class);
             intent.putExtra("campus", campus);
             intent.putExtra("grau", grau);

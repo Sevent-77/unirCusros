@@ -10,13 +10,13 @@
     android:paddingStart="16dp"
     android:paddingTop="24dp"
     android:paddingEnd="16dp"
-    tools:context=".List">
+    tools:context=".ListCourse">
 
     <ImageView
         android:id="@+id/imageLogo"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:contentDescription="Símbolo da Pokédex"
+        android:contentDescription="Logo da UNIR"
         android:scaleType="fitCenter"
         android:src="@drawable/img_2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,4 +50,15 @@
         app:layout_constraintTop_toBottomOf="@id/textTitle"
         tools:listitem="@layout/layout_item" />
 
+    <TextView
+        android:id="@+id/emptyMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Nenhum curso encontrado para esses filtros."
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
