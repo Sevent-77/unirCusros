@@ -52,7 +52,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MyViewHold
 
         Glide.with(holder.itemView)
                 .load(list.get(position).getImagem())
-                .placeholder(R.drawable.img_2)
                 .into(holder.imgAvatar);
     }
 
@@ -84,6 +83,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MyViewHold
                     if (position == RecyclerView.NO_POSITION) {
                         return;
                     }
+                    Intent intent = new Intent(view.getContext(), CoursePage.class);
+                    intent.putExtra("Nome", list.get(position).getNome());
+                    intent.putExtra("Turno", list.get(position).getTurno());
+                    intent.putExtra("Imagem", list.get(position).getImagem());
+                    intent.putExtra("Campus", list.get(position).getCampus());
+                    intent.putExtra("Grau", list.get(position).getGrau());
+                    intent.putExtra("Site", list.get(position).getSite());
+                    intent.putExtra("Descricao", list.get(position).getDescricao());
+                    view.getContext().startActivity(intent);
                 }
             });
 

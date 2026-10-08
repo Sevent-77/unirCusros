@@ -28,7 +28,7 @@ public class ListCourse extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        list = CursosData.getCursos();
+        list = CursosData.getCursos()   ;
         adapter = new CourseAdapter(list);
         recyclerView = findViewById(R.id.recyclerPokemon);
 

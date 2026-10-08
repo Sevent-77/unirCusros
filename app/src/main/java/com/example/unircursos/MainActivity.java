@@ -2,6 +2,7 @@ package com.example.unircursos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
@@ -12,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        spinner = findViewById(R.id.spinner);
+
+        String option[] = {"Vilhena","Rolim de Moura", "Presidente Médici", "Ji-Paraná", "Guajará-Mirim","Cacoal", "Ariquemes", "Porto Velho", "Todos"};
+        Collections.reverse(Arrays.asList(option));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, option);
+        spinner.setAdapter(adapter);
+
         button = findViewById(R.id.button);
         Button openPokedexButton = findViewById(R.id.button);
         openPokedexButton.setOnClickListener(view -> {
