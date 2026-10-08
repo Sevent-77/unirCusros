@@ -1,6 +1,10 @@
 package com.example.unircursos;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +14,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 
 public class MainActivity extends AppCompatActivity {
+    private Spinner spinner;
+    private Button button;
+    private RadioGroup radioGroup;
+    private CheckBox checkBox;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
