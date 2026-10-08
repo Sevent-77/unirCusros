@@ -76,7 +76,6 @@ public class CoursePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentAcess = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse(site));
                 startActivity(intentAcess);
-
             }
         });
 

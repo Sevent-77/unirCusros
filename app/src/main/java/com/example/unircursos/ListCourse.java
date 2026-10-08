@@ -28,7 +28,16 @@ public class ListCourse extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        list = CursosData.getCursos()   ;
+
+
+        String campus = getIntent().getStringExtra("campus");
+        String grau = getIntent().getStringExtra("grau");
+        boolean noite = getIntent().getBooleanExtra("noite", false);
+        ArrayList<Curso> lista = CursosData.getCursos();
+        if(noite){
+            
+        }
+
         adapter = new CourseAdapter(list);
         recyclerView = findViewById(R.id.recyclerPokemon);
 

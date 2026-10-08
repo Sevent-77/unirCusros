@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -36,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         spinner = findViewById(R.id.spinner);
+        radioGroup = findViewById(R.id.radioGroup);
+        checkBox = findViewById(R.id.checkBox);
+        String campus = spinner.getSelectedItem().toString();
+        int selected = radioGroup.getCheckedRadioButtonId();
+        RadioButton rb = findViewById(selected);
+        String grau = rb.getText().toString();
+        boolean noite = checkBox.isChecked();
+
 
         String option[] = {"Vilhena","Rolim de Moura", "Presidente Médici", "Ji-Paraná", "Guajará-Mirim","Cacoal", "Ariquemes", "Porto Velho", "Todos"};
         Collections.reverse(Arrays.asList(option));
@@ -46,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         Button openPokedexButton = findViewById(R.id.button);
         openPokedexButton.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ListCourse.class);
+            intent.putExtra("campus", campus);
+            intent.putExtra("grau", grau);
+            intent.putExtra("noite", noite);
             startActivity(intent);
         });
     }
