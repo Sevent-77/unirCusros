@@ -39,11 +39,6 @@ public class MainActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spinner);
         radioGroup = findViewById(R.id.radioGroup);
         checkBox = findViewById(R.id.checkBox);
-        String campus = spinner.getSelectedItem().toString();
-        int selected = radioGroup.getCheckedRadioButtonId();
-        RadioButton rb = findViewById(selected);
-        String grau = rb.getText().toString();
-        boolean noite = checkBox.isChecked();
 
 
         String option[] = {"Vilhena","Rolim de Moura", "Presidente Médici", "Ji-Paraná", "Guajará-Mirim","Cacoal", "Ariquemes", "Porto Velho", "Todos"};
@@ -51,9 +46,15 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, option);
         spinner.setAdapter(adapter);
 
+        String campus = spinner.getSelectedItem().toString();
+        int selected = radioGroup.getCheckedRadioButtonId();
+        RadioButton rb = findViewById(selected);
+        String grau = rb.getText().toString();
+        boolean noite = checkBox.isChecked();
+
+
         button = findViewById(R.id.button);
-        Button openPokedexButton = findViewById(R.id.button);
-        openPokedexButton.setOnClickListener(view -> {
+        button.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ListCourse.class);
             intent.putExtra("campus", campus);
             intent.putExtra("grau", grau);

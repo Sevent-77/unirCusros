@@ -33,13 +33,33 @@ public class ListCourse extends AppCompatActivity {
         String campus = getIntent().getStringExtra("campus");
         String grau = getIntent().getStringExtra("grau");
         boolean noite = getIntent().getBooleanExtra("noite", false);
-        ArrayList<Curso> lista = CursosData.getCursos();
-        if(noite){
-            
+
+        list = CursosData.getCursos();
+
+
+        ArrayList<Curso> todosCursos = CursosData.getCursos();
+        ArrayList<Curso> lista = new ArrayList<>();
+
+        for (Curso curso : todosCursos) {
+
+            boolean campusValido = campus == null
+                    || campus.equalsIgnoreCase("todos")
+                    || campus.trim().equalsIgnoreCase(curso.getCampus().trim());
+
+            boolean grauValido = grau == null
+                    || grau.equalsIgnoreCase("todos")
+                    || grau.trim().equalsIgnoreCase(curso.getGrau().trim());
+
+            boolean turnoValido = !noite
+                    || curso.getTurno().trim().equalsIgnoreCase("noturno");
+
+            if (campusValido && grauValido && turnoValido) {
+                lista.add(curso);
+            }
         }
 
         adapter = new CourseAdapter(list);
-        recyclerView = findViewById(R.id.recyclerPokemon);
+        recyclerView = findViewById(R.id.recyclerView);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
