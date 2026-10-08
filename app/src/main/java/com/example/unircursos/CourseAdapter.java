@@ -1,17 +1,13 @@
 package com.example.unircursos;
 
-import android.os.Bundle;
+import com.example.unircursos.Curso;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.helper.widget.Layer;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,64 +18,86 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MyViewHolder> {
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
+    private ArrayList<Curso> list;
+    private OnItemClickListener listener;
 
-    public interface OnClickListener {
+    public interface OnItemClickListener {
         void onItemClick(int position);
+        void onItemLongClick(int position);
     }
-    private final ArrayList<Curso> lista;
-    private final AdapterView.OnItemClickListener listener;
 
-    public CourseAdapter(ArrayList<Curso> lista, AdapterView.OnItemClickListener listener) {
-        this.lista = lista;
+    public CourseAdapter(ArrayList<Curso> list) {
+        this.list = list;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item, parent, false);
-        return new CourseViewHolder(view);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemLista = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.layout_item, parent, false);
+        return new MyViewHolder(itemLista);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        Curso c = lista.get(position);
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.txtNome.setText(list.get(position).getNome());
+        holder.textType.setText(list.get(position).getTurno());
+        holder.textDescription.setText(list.get(position).getCampus());
 
-        holder.txtNome.setText(c.getNome());
-
-        Glide.with(holder.itemView.getContext())
-                .load(c.getImagem())
+        Glide.with(holder.itemView)
+                .load(list.get(position).getImagem())
                 .placeholder(R.drawable.img_2)
-                .error(R.drawable.img_2)
-                .into(holder.img);
-
-
+                .into(holder.imgAvatar);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_course_adapter);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-    }
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
-    class CourseViewHolder extends RecyclerView.ViewHolder {
+        TextView txtNome;
+        TextView textType;
+        TextView textDescription;
+        ImageView imgAvatar;
 
-        public CourseViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            txtNome = itemView.findViewById(R.id.txtNome);
+            textType = itemView.findViewById(R.id.textType);
+            textDescription = itemView.findViewById(R.id.textDescription);
+            imgAvatar = itemView.findViewById(R.id.imgAvatar);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getBindingAdapterPosition();
+
+                    if (position == RecyclerView.NO_POSITION) {
+                        return;
+                    }
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    int position = getBindingAdapterPosition();
+
+                    if (position == RecyclerView.NO_POSITION) {
+                        return false;
+                    }
+                    return true;
+                }
+            });
         }
     }
-
 }
